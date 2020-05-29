@@ -1,8 +1,8 @@
 <?php
-namespace App\Lib\CSVReader;
+namespace CSVReader;
 
 class CSVReaderException extends \ErrorException {
-	// Constantes de erros possíveis de ser lançados em exceções
+	// Error constants used as error code (useful for customized error messages)
 	public const INDEXING_ERROR = 1;
 	public const EMPTY_CSV_ERROR = 2;
 	public const INVALID_LINE_ERROR = 3;
@@ -21,7 +21,7 @@ class CSVReaderException extends \ErrorException {
 	}
 	
 	/**
-	 * Detalhes a respeito do erro ocorrido
+	 * Details about the error (if any)
 	 * @return array|null
 	 */
 	public function getDetails(): ?array {
