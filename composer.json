@@ -1,5 +1,5 @@
 {
-    "name": "tonyfarney/CSVReader",
+    "name": "tonyfarney/csv-reader",
     "type": "library",
     "description": "Ease to use CSV Reader for PHP 7+",
     "keywords": ["CSV","reader"],
