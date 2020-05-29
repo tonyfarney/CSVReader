@@ -22,7 +22,7 @@ class CSVReaderException extends \ErrorException {
 	
 	/**
 	 * Details about the error (if any)
-	 * @return array|null
+	 * @return array
 	 */
 	public function getDetails(): array {
 		return $this->_details;

@@ -14,7 +14,7 @@ For all the examples of use, we will consider the following code as the base imp
     <?php
     require __DIR__.'/vendor/autoload.php';
         
-    use CSVReader\CSVReader;
+    use \CSVReader\CSVReader;
         
     $csvWithHeader = <<<CSV
     name,role,age
