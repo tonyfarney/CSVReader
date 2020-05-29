@@ -325,6 +325,7 @@ class CSVReader {
 		$this->setEnclosure('');
 		$this->setEscape(null);
 	}
+
 	/**
 	 * Sets the column delimiter (generally "," or ";" character)
 	 * @param string $delimitador
@@ -384,7 +385,7 @@ class CSVReader {
 	 * @param string $csv
 	 * @throws CSVReaderException
 	 */
-	private function _detectColumnDelimiter(string $csv): void {
+	private function _detectColumnDelimiter(string $csv) {
 		// Most common delimiters
 		$commonDelimiters = [
 			";" => 0,
@@ -497,7 +498,7 @@ class CSVReader {
 	 * @param string $column
 	 * @return string
 	 */
-	private function _getArrayHeader(string $column): ?string {
+	private function _getArrayHeader(string $column): string {
 		$headerColumns = $this->getHeader();
 		$column = $this->_adjustHeaderColumnToCompare($column);
 		foreach ($headerColumns as $headerColumn) {
@@ -507,8 +508,7 @@ class CSVReader {
 		}
 		return null;
 	}
-	
-	
+		
 	/**
 	 * Checks whether the line is empty or not
 	 * @param array $columns
