@@ -95,7 +95,7 @@ class CSVReader {
 	public function setHeader(array $header, bool $trim = false, bool $caseInsensitive = false): self {
 		if (count(array_unique($header)) != count($header)) {
 			throw new CSVReaderException(
-				'Não é permitido colunas de mesmo nome no cabeçalho do arquivo.',
+				"It's not allowed repeated columns in the header",
 				CSVReaderException::INDEXING_ERROR
 			);
 		}
@@ -147,7 +147,7 @@ class CSVReader {
 	public function setIndexing(array $indexing): self {
 		if (count(array_unique($indexing)) != count($indexing)) {
 			throw new CSVReaderException(
-				'Não é permitido colunas de mesmo nome para indexação do arquivo.',
+				"It's not allowed repeated names for the column indexing",
 				CSVReaderException::INDEXING_ERROR
 			);
 		}
@@ -228,7 +228,7 @@ class CSVReader {
 			break;
 		}
 		if (!$hasContent) {
-			throw new CSVReaderException('Conteúdo CSV vazio.', CSVReaderException::EMPTY_CSV_ERROR);
+			throw new CSVReaderException('Empty CSV', CSVReaderException::EMPTY_CSV_ERROR);
 		}
 		
 		// Checks the use of indexing
@@ -272,8 +272,8 @@ class CSVReader {
 		} // End foreach lines
 		if ($this->_linesInvalidSize) {
 			throw new CSVReaderException(
-				'As seguintes linhas do arquivo possuem número incompatível de valores: '.implode(', ', $this->_linesInvalidSize),
-				CSVReaderException::INVALID_LINE_ERROR
+				'The following lines of the CSV has mismatching number of values: '.implode(', ', $this->_linesInvalidSize),
+				CSVReaderException::INVALID_LINE_ERROR, $this->_linesInvalidSize
 			);
 		}
 		return $this->_lines;
@@ -305,13 +305,13 @@ class CSVReader {
 		}
 		if ($invalidColumns) {
 			throw new CSVReaderException(
-				'As seguintes colunas não são esperadas no cabeçalho: '.implode(", ", $invalidColumns),
-				CSVReaderException::UNEXPECTED_HEADER_COLUMN
+				'The following columns are not expected in the header: '.implode(", ", $invalidColumns),
+				CSVReaderException::UNEXPECTED_HEADER_COLUMN, $invalidColumns
 			);
 		}
 		if (count(array_unique($this->_headerRead)) !== count($this->_headerRead)) {
 			throw new CSVReaderException(
-				'O CSV contém colunas repetidas.',
+				'The CSV contains repeated columns',
 				CSVReaderException::UNEXPECTED_HEADER_COLUMN
 			);
 		}
@@ -407,7 +407,7 @@ class CSVReader {
 		arsort($commonDelimiters, SORT_NUMERIC);
 		if (current($commonDelimiters) === 0) {
 			throw new CSVReaderException(
-				'Não foi possível identificar o delimitador de colunas.',
+				'Unable to detect the column delmiter',
 				CSVReaderException::FAILED_TO_DETECT_COLUMN_DELIMITER
 			);
 		}
@@ -466,7 +466,7 @@ class CSVReader {
 		$rs = $this->_createTmpFile($csv);
 		if (!$rs) {
 			throw new CSVReaderException(
-				'Falou ao criar o arquivo temporário para processamento do CSV.',
+				'Error while creating temporary file for processing',
 				CSVReaderException::FAILED_TO_CREATE_TMP_FILE
 			);
 		}
@@ -496,9 +496,9 @@ class CSVReader {
 	 * Checks wheter the column is into the expected columns or not and returns
 	 * the expected column as it is expected. Returns null if not expected
 	 * @param string $column
-	 * @return string
+	 * @return string|null
 	 */
-	private function _getArrayHeader(string $column): string {
+	private function _getArrayHeader(string $column) {
 		$headerColumns = $this->getHeader();
 		$column = $this->_adjustHeaderColumnToCompare($column);
 		foreach ($headerColumns as $headerColumn) {
