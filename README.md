@@ -5,7 +5,7 @@ Ease to use CSV Reader for PHP 7+
 ## Instalation
 In your project root, run the following composer command:
 
-    $ composer require tonyfarney/CSVReader
+    $ composer require tonyfarney/csv-reader
 
 ## General orientations
 CSVReader loads CSV from string and returns an array containing all lines read. Each position is a line e each line is an array of columns.
